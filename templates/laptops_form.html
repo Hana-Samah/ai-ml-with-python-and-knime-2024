@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Price Estimator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Estimate Laptop Price</h1>
+    <form method="POST">
+        <label>Brand: <input type="text" name="brand" required></label><br>
+        <label>Model: <input type="text" name="model" required></label><br>
+        <label>RAM (GB): <input type="number" name="ram" required></label><br>
+        <label>Storage (GB): <input type="number" name="storage" required></label><br>
+        <label>Storage Type: <input type="text" name="storage_type" required></label><br>
+        <label>CPU: <input type="text" name="cpu" required></label><br>
+        <label>Touch (Yes/No): <input type="text" name="touch" required></label><br>
+        <button type="submit">Estimate Price</button>
+    </form>
+</body>
+</html>
