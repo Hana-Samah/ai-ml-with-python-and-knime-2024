@@ -1,234 +1,101 @@
 # Dynamic Pricing Project
 
-This project demonstrates a **Dynamic Pricing System** for electronic devices using **Machine Learning** and a **Flask Web Application**. It uses historical data to predict an optimal price based on demand, competition prices, and product features.
+## 1. Business Understanding
+### Main Objective:
+Develop a Dynamic Pricing system that determines appropriate prices for products (e.g., laptops or smartphones) based on specific features (RAM, storage, processor type, etc.).
+
+### Business Questions:
+- How can we use existing data to predict a fair selling price?
+- What features influence the product's price?
+- How can the system reflect market dynamics?
 
 ---
 
-## **CRISP-DM Methodology**
+## 2. Data Understanding
+### Data Source:
+Two CSV files (`laptops.csv` and `smartphones.csv`) containing details such as:
 
-### **1. Business Understanding**
+#### Laptops:
+- Brand
+- Model
+- RAM
+- Storage
+- Storage Type
+- Processor
+- Touchscreen
 
-#### Objective:
-To build a pricing model that predicts the price of electronic devices dynamically based on:
-- **Demand**: Number of product purchases.
-- **Competition Prices**: Average prices of similar products in the market.
-- **Features**: Product brand, specifications, and type.
+#### Smartphones:
+- Brand
+- Model
+- RAM
+- Storage
+- Color
 
-#### Key Question:
-How can the system determine an optimal price reflecting market factors?
-
-#### Expected Outcome:
-A model that predicts the price dynamically based on user input.
-
----
-
-### **2. Data Understanding**
-
-#### Required Data:
-- **Demand**: Sales count.
-- **Competition Prices**: Prices of competing products.
-- **Product Features**: Brand, storage capacity, type (e.g., smartphone, laptop).
-- **Target Price**: The final price (used as the target variable).
-
-#### Data Source:
-Datasets such as [Amazon Electronics Data](https://www.kaggle.com/) can be used.
+### Data Exploration:
+- Examine the distribution of features (RAM, storage, price).
+- Ensure data quality (no missing or incorrect data).
 
 ---
 
-### **3. Data Preparation**
+## 3. Data Preparation
+### Cleaning:
+- Handle missing values using appropriate methods (e.g., imputing with median values or dropping incomplete records).
 
-#### Steps:
-1. **Data Cleaning**: Remove null values and inconsistent data.
-2. **Feature Encoding**: Convert categorical data (e.g., brand) into numeric values using Label Encoding.
-3. **Feature Scaling**: Standardize the input features for better model performance.
-4. **Data Splitting**: Split the data into training and testing sets.
+### Transformation:
+- Convert textual features (e.g., processor or storage type) into numerical values using techniques like One-Hot Encoding.
 
----
-
-### **4. Modeling**
-
-#### Model:
-- **Linear Regression**: A regression algorithm suitable for predicting continuous values.
-
-#### Steps:
-1. Train the model using the training dataset.
-2. Evaluate model performance using the testing dataset.
+### Data Splitting:
+- Split data into training and testing sets.
 
 ---
 
-### **5. Evaluation**
+## 4. Modeling
+### Model Selection:
+- Use Linear Regression to predict prices.
 
-#### Metrics:
-- **Mean Absolute Error (MAE)**: To measure prediction accuracy.
-- **R-squared**: To measure the proportion of variance explained by the model.
+### Input and Output Preparation:
+- **Inputs:** Features like RAM, storage, processor type, etc.
+- **Output:** Expected price (Final Price).
 
----
+### Training the Model:
+- Train separate models for laptops and smartphones.
 
-### **6. Deployment**
-
-The final model is deployed as a web application using **Flask**, allowing users to input data and get real-time price predictions.
-
----
-
-## **Project Setup**
-
-### **1. Environment Setup**
-
-#### Install Anaconda:
-Download and install Anaconda from [here](https://www.anaconda.com/).
-
-#### Install Required Libraries:
-```bash
-pip install flask scikit-learn pandas joblib
-```
+### Model Optimization:
+- Experiment with more complex models if necessary (e.g., Decision Trees or Random Forest).
 
 ---
 
-### **2. Data Preparation**
+## 5. Evaluation
+### Model Testing:
+- Assess model accuracy using the test data.
 
-#### Sample Code to Prepare Data:
+### Metrics Used:
+- **Mean Absolute Error (MAE):** To measure the average difference between predicted and actual prices.
+- **R² Score:** To evaluate how well the model explains data variance.
 
-```python
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder, StandardScaler
-import joblib
-
-# Load data
-data = pd.read_csv("electronics_pricing.csv")
-
-# Clean data
-data = data.dropna()
-
-# Encode categorical features
-label_encoder = LabelEncoder()
-data['brand_encoded'] = label_encoder.fit_transform(data['brand'])
-
-# Prepare features and target
-X = data[['demand', 'competition_price', 'brand_encoded']]
-y = data['price']
-
-# Scale features
-scaler = StandardScaler()
-X = scaler.fit_transform(X)
-
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Train model
-from sklearn.linear_model import LinearRegression
-model = LinearRegression()
-model.fit(X_train, y_train)
-
-# Save model and scaler
-joblib.dump(model, "price_model.pkl")
-joblib.dump(scaler, "scaler.pkl")
-```
+### Results:
+- Adopt the model if accuracy is acceptable. Improve data quality or model performance if results are poor.
 
 ---
 
-### **3. Flask Application**
+## 6. Deployment
+### User Interface Development:
+Build a web interface using Flask:
+- **Input Form:** Allows users to select the device type and enter specifications.
+- **Price Result:** Displays the predicted price based on the input.
 
-#### Flask Code (`app.py`):
+### Workflow:
+1. Users select the device type and enter specifications.
+2. Data is sent to the trained model.
+3. The system displays the predicted price on the screen.
 
-```python
-from flask import Flask, render_template, request
-import joblib
-
-app = Flask(__name__)
-
-# Load model and scaler
-model = joblib.load("price_model.pkl")
-scaler = joblib.load("scaler.pkl")
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-@app.route("/predict", methods=["POST"])
-def predict():
-    demand = float(request.form["demand"])
-    competition_price = float(request.form["competition_price"])
-    brand_encoded = int(request.form["brand_encoded"])
-
-    # Prepare input
-    input_data = scaler.transform([[demand, competition_price, brand_encoded]])
-    price = model.predict(input_data)
-
-    return render_template("result.html", price=round(price[0], 2))
-
-if __name__ == "__main__":
-    app.run(debug=True)
-```
+### Future Steps:
+- Enhance the model with more data or advanced models.
+- Integrate the project into a larger system, such as an e-commerce platform.
 
 ---
 
-### **4. HTML Templates**
+## Final Outputs:
+- **Interactive Web Interface:** Allows users to input device specifications and get a predicted price.
+- **Dynamic Pricing Model:** Processes data and provides realistic, market-aligned prices.
 
-#### `templates/index.html`:
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dynamic Pricing</title>
-</head>
-<body>
-    <h1>Dynamic Pricing Prediction</h1>
-    <form action="/predict" method="POST">
-        <label>Demand:</label>
-        <input type="number" name="demand" required><br>
-        <label>Competition Price:</label>
-        <input type="number" name="competition_price" required><br>
-        <label>Brand:</label>
-        <select name="brand_encoded">
-            <option value="0">Brand A</option>
-            <option value="1">Brand B</option>
-        </select><br>
-        <button type="submit">Predict</button>
-    </form>
-</body>
-</html>
-```
-
-#### `templates/result.html`:
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Prediction Result</title>
-</head>
-<body>
-    <h1>Predicted Price: ${{ price }}</h1>
-    <a href="/">Back</a>
-</body>
-</html>
-```
-
----
-
-### **5. Run the Application**
-
-1. Start the Flask application:
-   ```bash
-   python app.py
-   ```
-
-2. Open your browser and go to:
-   ```
-   http://127.0.0.1:5000/
-   ```
-
----
-
-## **Resources**
-
-1. **Python Basics**:
-   - [W3Schools Python](https://www.w3schools.com/python/)
-
-2. **Flask Documentation**:
-   - [Flask Docs](https://flask.palletsprojects.com/)
-
-3. **Machine Learning**:
-   - [Scikit-learn Tutorials](https://scikit-learn.org/stable/tutorial/index.html)
-
-Feel free to reach out if you need further assistance!
