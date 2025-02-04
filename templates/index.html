@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-7">
                   <div class="img-box">
-                    <img src="{{ url_for('static', filename='images/slider-img.png') }}" alt="">
+                    <img src="{{ url_for('static', filename='images/') }}" alt="">
                   </div>
                 </div>
               </div>
@@ -105,15 +105,15 @@
           Our System
         </h2>
         <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo
-            maxime voluptatem a itaque suscipit.
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus quidem maiores perspiciatis, illo
+          maxime voluptatem a itaque suscipit.
         </p>
       </div>
       <div class="row">
         <div class="col-md-6 col-lg-4">
           <div class="box">
             <div class="img-box">
-                <img src="{{ url_for('static', filename='images/') }}" alt="">
+              <img src="{{ url_for('static', filename='images/') }}" alt="">
             </div>
             <div class="detail-box">
               <a href="/laptop" class="btn btn-primary m-2">Estimate Laptop Price</a>
@@ -123,7 +123,7 @@
         <div class="col-md-6 col-lg-4">
           <div class="box">
             <div class="img-box">
-                <img src="{{ url_for('static', filename='images/') }}" alt="">
+              <img src="{{ url_for('static', filename='images/') }}" alt="">
             </div>
             <div class="detail-box">
               <a href="/smartphone" class="btn btn-success m-2">Estimate Smartphone Price</a>
@@ -144,7 +144,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="img-box">
-            <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="">
+            <img src="{{ url_for('static', filename='images/') }}" alt="">
           </div>
         </div>
         <div class="col-md-6">
@@ -174,65 +174,31 @@
   <section class="blog_section layout_padding">
     <div class="container">
       <div class="heading_container">
-        <h2>
-          chort
-        </h2>
+        <h2>Charts</h2>
       </div>
       <div class="row">
+        <!-- رسم بياني للابتوبات -->
         <div class="col-md-6 col-lg-4 mx-auto">
           <div class="box">
             <div class="img-box">
-                <img src="{{ url_for('static', filename='images/') }}" alt="">
+              <img src="{{ url_for('static', filename='images/' + laptop_plot) }}" alt="Laptop Price Chart">
             </div>
             <div class="detail-box">
-              <h5>
-                Look even slightly believable. If you are
-              </h5>
-              <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly
-                believable.
-              </p>
-              <a href="">
-                Read More
-              </a>
+              <h5> Laptop Price Prediction </h5>
+              <p>Comparison between actual and predicted prices of laptops.</p>
             </div>
           </div>
         </div>
+
+        <!-- رسم بياني للهواتف -->
         <div class="col-md-6 col-lg-4 mx-auto">
           <div class="box">
             <div class="img-box">
-                <img src="{{ url_for('static', filename='images/') }}" alt="">
+              <img src="{{ url_for('static', filename='images/' + smartphone_plot) }}" alt="Smartphone Price Chart">
             </div>
             <div class="detail-box">
-              <h5>
-                Anything embarrassing hidden in the middle
-              </h5>
-              <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly
-                believable.
-              </p>
-              <a href="">
-                Read More
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-                <img src="{{ url_for('static', filename='images/') }}" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Molestias magni natus dolores odio commodi. Quaerat!
-              </h5>
-              <p>
-                alteration in some form, by injected humour, or randomised words which don't look even slightly
-                believable.
-              </p>
-              <a href="">
-                Read More
-              </a>
+              <h5> Smartphone Price Prediction </h5>
+              <p>Comparison between actual and predicted prices of smartphones.</p>
             </div>
           </div>
         </div>
