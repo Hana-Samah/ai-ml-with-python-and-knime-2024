@@ -1,101 +1,53 @@
-# Dynamic Pricing Project
+# Predicting Device Prices (Laptops and Smartphones)
 
-## 1. Business Understanding
-### Main Objective:
-Develop a Dynamic Pricing system that determines appropriate prices for products (e.g., laptops or smartphones) based on specific features (RAM, storage, processor type, etc.).
+## Overview
 
-### Business Questions:
-- How can we use existing data to predict a fair selling price?
-- What features influence the product's price?
-- How can the system reflect market dynamics?
+This project aims to predict the prices of laptops and smartphones based on their features using machine learning techniques, specifically the RandomForestRegressor model. The project implements the **CRISP-DM** methodology for data mining and provides an interactive web interface built with Flask to visualize the results.
 
----
+## Methodology (CRISP-DM)
 
-## 2. Data Understanding
-### Data Source:
-Two CSV files (`laptops.csv` and `smartphones.csv`) containing details such as:
+1. **Business Understanding**: 
+   The goal of the project is to predict device prices (laptops and smartphones) based on specific features like RAM, Storage, CPU, and Brand.
 
-#### Laptops:
-- Brand
-- Model
-- RAM
-- Storage
-- Storage Type
-- Processor
-- Touchscreen
+2. **Data Understanding**:
+   - The project uses two datasets:
+     - **laptops.csv**: Contains features of laptops including brand, model, RAM, storage, etc.
+     - **smartphones.csv**: Contains features of smartphones including brand, model, RAM, storage, and color.
+   - These datasets are analyzed to understand their structure and identify missing values.
 
-#### Smartphones:
-- Brand
-- Model
-- RAM
-- Storage
-- Color
+3. **Data Preparation**:
+   - Missing values are removed.
+   - Features are preprocessed by creating dummy variables for categorical data.
 
-### Data Exploration:
-- Examine the distribution of features (RAM, storage, price).
-- Ensure data quality (no missing or incorrect data).
+4. **Modeling**:
+   - A Random Forest Regressor model is used to predict the prices based on the selected features for both laptops and smartphones.
+   - The model is trained and evaluated using Mean Absolute Error (MAE) and R² score.
 
----
+5. **Evaluation**:
+   - The model's performance is evaluated based on MAE and R² score for both laptops and smartphones.
 
-## 3. Data Preparation
-### Cleaning:
-- Handle missing values using appropriate methods (e.g., imputing with median values or dropping incomplete records).
+6. **Deployment**:
+   - A Flask web application is built to display the results of the predictions and show the comparison between actual and predicted prices with graphs.
 
-### Transformation:
-- Convert textual features (e.g., processor or storage type) into numerical values using techniques like One-Hot Encoding.
+## Project Structure
 
-### Data Splitting:
-- Split data into training and testing sets.
+- **app.py**: Main Python file containing the Flask application and machine learning model.
+- **static/uploads/**: Folder where uploaded files are stored.
+- **static/images/**: Folder where generated plots are stored.
+- **templates/index.html**: HTML file for rendering the results on the web interface.
 
----
+## Requirements
 
-## 4. Modeling
-### Model Selection:
-- Use Linear Regression to predict prices.
+- Python 3.x
+- Flask
+- pandas
+- matplotlib
+- scikit-learn
+- werkzeug
 
-### Input and Output Preparation:
-- **Inputs:** Features like RAM, storage, processor type, etc.
-- **Output:** Expected price (Final Price).
+## Installation
 
-### Training the Model:
-- Train separate models for laptops and smartphones.
+1. Clone the repository:
 
-### Model Optimization:
-- Experiment with more complex models if necessary (e.g., Decision Trees or Random Forest).
-
----
-
-## 5. Evaluation
-### Model Testing:
-- Assess model accuracy using the test data.
-
-### Metrics Used:
-- **Mean Absolute Error (MAE):** To measure the average difference between predicted and actual prices.
-- **R² Score:** To evaluate how well the model explains data variance.
-
-### Results:
-- Adopt the model if accuracy is acceptable. Improve data quality or model performance if results are poor.
-
----
-
-## 6. Deployment
-### User Interface Development:
-Build a web interface using Flask:
-- **Input Form:** Allows users to select the device type and enter specifications.
-- **Price Result:** Displays the predicted price based on the input.
-
-### Workflow:
-1. Users select the device type and enter specifications.
-2. Data is sent to the trained model.
-3. The system displays the predicted price on the screen.
-
-### Future Steps:
-- Enhance the model with more data or advanced models.
-- Integrate the project into a larger system, such as an e-commerce platform.
-
----
-
-## Final Outputs:
-- **Interactive Web Interface:** Allows users to input device specifications and get a predicted price.
-- **Dynamic Pricing Model:** Processes data and provides realistic, market-aligned prices.
-
+   ```bash
+   git clone <repository_url>
