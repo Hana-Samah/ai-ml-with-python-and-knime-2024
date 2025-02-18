@@ -23,10 +23,30 @@ smartphones = pd.read_csv("data/smartphones.csv")
 
 # 3. تحضير البيانات (Data Preparation)
 def preprocess_data(data, features):
-    data = data.dropna()
-    X = pd.get_dummies(data[features])  # تحويل البيانات النصية إلى رقمية
+    # إزالة القيم الفارغة بشكل عام
+    data = data.copy()
+
+    # تنظيف القيم النصية
+    for col in features:
+        if data[col].dtype == "object":  
+            data[col] = data[col].astype(str).str.lower().str.strip().fillna("unknown")
+
+    # تحويل الأعمدة الرقمية ومعالجة القيم الفارغة
+    numeric_columns = ["RAM", "Storage", "Final Price"]
+    for col in numeric_columns:
+        if col in data.columns:
+            data[col] = pd.to_numeric(data[col], errors="coerce")  # تحويل إلى رقم، مع التعامل مع الأخطاء
+            data[col].fillna(data[col].median(), inplace=True)  # استبدال القيم الفارغة بالوسيط
+
+    # التحقق من عدم وجود قيم غير رقمية بعد التحويل
+    data = data.dropna(subset=["Final Price"])  # حذف أي صف لا يحتوي على سعر نهائي صالح
+
+    # تحويل البيانات النصية إلى رقمية باستخدام One-Hot Encoding
+    X = pd.get_dummies(data[features], drop_first=True)
     y = data["Final Price"]
+
     return X, y
+
 
 # 4. نمذجة البيانات (Modeling)
 def train_model(data, features, filename):

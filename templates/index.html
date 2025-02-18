@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap">
+
 </head>
 
 <body>
@@ -84,7 +85,7 @@
                 </div>
                 <div class="col-md-7">
                   <div class="img-box">
-                    <img src="{{ url_for('static', filename='images/') }}" alt="">
+                    <img src="{{ url_for('static', filename='images/1728450.png') }}" alt="" style="max-width: 100%; height: auto;">
                   </div>
                 </div>
               </div>
@@ -113,17 +114,17 @@
         <div class="col-md-6 col-lg-4">
           <div class="box">
             <div class="img-box">
-              <img src="{{ url_for('static', filename='images/') }}" alt="">
+              <img src="{{ url_for('static', filename='images/laptop.jpg') }}" alt="">
             </div>
             <div class="detail-box">
-              <a href="/laptop" class="btn btn-primary m-2">Estimate Laptop Price</a>
+              <a href="/laptop" class="btn btn-warning m-2">Estimate Laptop Price</a>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
           <div class="box">
             <div class="img-box">
-              <img src="{{ url_for('static', filename='images/') }}" alt="">
+              <img src="{{ url_for('static', filename='images/smartphone.jpg') }}" alt="">
             </div>
             <div class="detail-box">
               <a href="/smartphone" class="btn btn-success m-2">Estimate Smartphone Price</a>
@@ -139,12 +140,12 @@
 
   <!-- about section -->
 
-  <section class="about_section layout_padding long_section" id="about">
+  <section class="about_section layout_padding long_section" id="about" >
     <div class="container">
       <div class="row">
         <div class="col-md-6">
           <div class="img-box">
-            <img src="{{ url_for('static', filename='images/') }}" alt="">
+            <img src="{{ url_for('static', filename='images/0000.jpg') }}" alt="" style="height: 450px; width: 450px;">
           </div>
         </div>
         <div class="col-md-6">
@@ -310,19 +311,3 @@
     </div>
   </section>
   <!-- end info_section -->
-
-
-
-
-
-  <!-- jQery -->
-  <script src="../js/jquery-3.4.1.min.js"></script>
-  <!-- bootstrap js -->
-  <script src="../js/bootstrap.js"></script>
-  <!-- custom js -->
-  <script src="../js/custom.js"></script>
-
-
-</body>
-
-</html>
